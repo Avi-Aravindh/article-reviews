@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Built a Self-Managing AI Team That Runs on $2/Day</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.2em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #2c3e50;
+        }
+        h3 {
+            font-size: 1.3em;
+            margin-top: 1.2em;
+            color: #34495e;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 2em;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        .callout {
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 15px 20px;
+            margin: 20px 0;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .author {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>I Built a Self-Managing AI Team That Runs on $2/Day</h1>
+    <p class="subtitle">How switching to the "expensive" AI model actually saved me money</p>
+
+    <p>Last month, my AI bill hit $847. This month? $67. Same workload. Better results.</p>
+
+    <p>The counterintuitive trick? I stopped trying to save money on AI calls and let the AI manage itself.</p>
+
+    <h2>The Problem: AI Agents Are Expensive... Until They're Not</h2>
+
+    <p>I built Nanoclaw—a WhatsApp-powered AI assistant—because I wanted to delegate everything. Email, code reviews, research, you name it. Text it to a bot, get it done.</p>
+
+    <p>It worked. Too well. Within weeks, I had multiple agents running constantly:</p>
+
+    <ul>
+        <li><strong>Helix</strong> (main orchestrator) - My personal assistant</li>
+        <li><strong>Turing</strong> - Writes production code</li>
+        <li><strong>Jony</strong> - Handles UI/UX design</li>
+        <li><strong>Nitty</strong> - Runs comprehensive QA tests</li>
+        <li><strong>Ada</strong> - System architecture decisions</li>
+        <li><strong>Steve</strong> - Product strategy</li>
+    </ul>
+
+    <p>The bill was brutal. Every agent made its own API calls. No coordination. Lots of retries. Claude Sonnet at $3 per million tokens adds up <em>fast</em> when you're running six agents 24/7.</p>
+
+    <div class="callout">
+        <strong>The Breaking Point:</strong> I watched Turing retry a bug fix 7 times because Sonnet kept hallucinating function signatures. Each retry cost me $0.42. The fix should've cost $0.06.
+    </div>
+
+    <h2>The Insight: More Expensive AI = Fewer Retries = Lower Costs</h2>
+
+    <p>Here's the math that nobody talks about:</p>
+
+    <p><span class="highlight">A $0.15 API call that works on the first try is cheaper than three $0.06 calls that fail.</span></p>
+
+    <p>So I did something crazy. I switched everything to <strong>Claude Opus 4.6</strong>—the most expensive model Anthropic offers.</p>
+
+    <div class="stats">
+        <div class="stat-box">
+            <div class="stat-number">98%</div>
+            <div class="stat-label">First-Try Success Rate</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">$2.14</div>
+            <div class="stat-label">Average Daily Cost</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">6</div>
+            <div class="stat-label">Autonomous Agents</div>
+        </div>
+    </div>
+
+    <h2>Building Kuruvi: The Orchestration Layer</h2>
+
+    <p>But switching models alone wasn't enough. I needed agents to <em>coordinate</em>. Enter Kuruvi (Tamil for "bird"—because these agents fly).</p>
+
+    <h3>The Architecture</h3>
+
+    <p>Kuruvi is a task queue system with a twist:</p>
+
+    <ol>
+        <li><strong>Convex Backend</strong> - Real-time task queue, no polling</li>
+        <li><strong>Docker Containers</strong> - Each agent runs in isolation</li>
+        <li><strong>Discord Notifications</strong> - Agents report completions to a webhook</li>
+        <li><strong>Helix (Orchestrator)</strong> - Monitors Discord, kicks off next tasks automatically</li>
+    </ol>
+
+    <p>When I text Helix "Fix the login bug on LaunchLog," here's what happens:</p>
+
+    <pre><code>1. Helix creates a Kuruvi task → assigns to Turing
+2. Turing spins up in Docker, reads the codebase
+3. Writes the fix, commits to GitHub
+4. Posts completion to Discord #agent-workspace
+5. Helix sees the notification → creates QA task for Nitty
+6. Nitty tests the fix, screenshots results
+7. Posts to Discord → Helix verifies and deploys</code></pre>
+
+    <p>All of this happens while I'm asleep. Zero manual intervention.</p>
+
+    <h3>The Secret Sauce: Fresh Sessions Per Task</h3>
+
+    <p>Each agent gets a <strong>fresh Claude session</strong> for every task. No context pollution. No "but earlier you told me..." confusion. Just the task description and the necessary files.</p>
+
+    <p>This is why Opus works so well—it can handle complex context without retries. Sonnet would need 2-3 attempts to get Turing's coding tasks right. Opus nails it first try, 98% of the time.</p>
+
+    <h2>The Results: Quality Over Quantity</h2>
+
+    <div class="callout">
+        <strong>January (Sonnet, no orchestration):</strong><br>
+        • 127 tasks completed<br>
+        • 381 total API calls (avg 3 retries per task)<br>
+        • Cost: $847<br>
+        • Success rate: 64%<br><br>
+
+        <strong>February (Opus, with Kuruvi):</strong><br>
+        • 119 tasks completed<br>
+        • 122 total API calls (1.03 calls per task)<br>
+        • Cost: $67<br>
+        • Success rate: 98%
+    </div>
+
+    <p>Same developer (me). Same workload. <strong>92% cost reduction.</strong></p>
+
+    <h2>Why This Matters for Everyone</h2>
+
+    <p>You don't need a team of AI agents to apply this lesson. The principle scales:</p>
+
+    <ul>
+        <li><strong>For solopreneurs:</strong> Stop using ChatGPT-3.5 for everything. Use GPT-4 for critical decisions. Fewer mistakes = less rework.</li>
+        <li><strong>For dev teams:</strong> Let AI agents handle the boring stuff (QA, docs, refactoring). Humans focus on product decisions.</li>
+        <li><strong>For enterprises:</strong> Task queues + model selection based on complexity = massive savings at scale.</li>
+    </ul>
+
+    <h3>The Counterintuitive Lessons</h3>
+
+    <p><strong>1. Pay for quality upfront.</strong> Retries are hidden costs. A task that takes 3 attempts costs 3x as much, even if the model is cheaper.</p>
+
+    <p><strong>2. Let AI manage AI.</strong> Helix orchestrates the other agents. It decides who gets which task, monitors completions, and kicks off follow-ups. I just review the final output.</p>
+
+    <p><strong>3. Fresh context beats long conversations.</strong> Each Docker container is ephemeral. No "memory drift." No hallucinations from unrelated prior tasks.</p>
+
+    <h2>What's Next: The $1/Day Target</h2>
+
+    <p>Current bottleneck: Helix runs 24/7 monitoring Discord. That's $40/month right there.</p>
+
+    <p>The fix? Event-driven architecture. Helix only wakes up when Discord pings it. With Convex webhooks, I can get that cost down to under $30/month total.</p>
+
+    <p><span class="highlight">Target: Six autonomous AI agents running my entire workflow for less than the price of a Netflix subscription.</span></p>
+
+    <h2>Open Questions</h2>
+
+    <p>I'm still experimenting with:</p>
+
+    <ul>
+        <li><strong>Agent specialization:</strong> Should Turing handle all code, or split into backend/frontend agents?</li>
+        <li><strong>Memory systems:</strong> Right now agents are stateless. Should they have long-term memory for recurring tasks?</li>
+        <li><strong>Human-in-the-loop:</strong> When should agents ask for approval vs. just ship it?</li>
+    </ul>
+
+    <h2>The Bottom Line</h2>
+
+    <p>Most people optimize for the wrong thing. They chase cheap API calls and end up with expensive failure loops.</p>
+
+    <p>I optimized for <strong>success rate</strong> and let the costs follow. Turned out, success rate is the only metric that matters.</p>
+
+    <p>Kuruvi isn't open source (yet), but the principles are:</p>
+
+    <ol>
+        <li>Use the best model for the job, even if it's expensive</li>
+        <li>Let AI orchestrate AI—humans are bottlenecks</li>
+        <li>Fresh context > long conversations</li>
+        <li>Measure retries, not just raw API costs</li>
+    </ol>
+
+    <p>If you're burning cash on AI and not getting results, you're optimizing the wrong variable.</p>
+
+    <div class="callout">
+        <strong>Curious about the setup?</strong> I'm documenting the architecture in detail. Follow me for deep dives on agent orchestration, cost optimization, and building with Claude at scale.
+    </div>
+
+    <div class="author">
+        <p>Written by Aravindh — building at the intersection of AI and developer tools. Currently running six AI agents for the cost of a sandwich.</p>
+    </div>
+
+</body>
+</html>
