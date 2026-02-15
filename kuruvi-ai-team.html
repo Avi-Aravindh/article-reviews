@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I Built an AI Team That Manages Itself (And Cut My Costs by 80%)</title>
+    <title>I Built an AI Team in 500 Lines of Code (You Shouldn't)</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -22,100 +22,250 @@
         p { margin-bottom: 24px; font-size: 18px; }
         .highlight { background: #fff9c4; padding: 2px 6px; border-radius: 3px; }
         .callout { background: #f0f7ff; border-left: 4px solid #2196f3; padding: 24px; margin: 32px 0; border-radius: 0 8px 8px 0; }
-        .cost-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 32px 0; }
-        .cost-card { padding: 24px; border-radius: 8px; text-align: center; }
-        .cost-before { background: #ffebee; border: 2px solid #ef5350; }
-        .cost-after { background: #e8f5e9; border: 2px solid #66bb6a; }
-        .cost-amount { font-size: 48px; font-weight: 700; margin: 16px 0; }
+        .callout-warning { background: #fff3e0; border-left-color: #ff9800; }
+        .callout-success { background: #f1f8f4; border-left-color: #4caf50; }
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 32px 0; }
+        .comparison-card { padding: 24px; border-radius: 8px; }
+        .diy-card { background: #ffebee; border: 2px solid #ef5350; }
+        .nanoclaw-card { background: #e8f5e9; border: 2px solid #66bb6a; }
+        .card-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
         code { background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
         ul, ol { margin-left: 24px; margin-bottom: 24px; }
         li { margin-bottom: 12px; font-size: 18px; }
+        .blueprint { background: #f8f9fa; border: 2px solid #dee2e6; padding: 24px; border-radius: 8px; margin: 32px 0; }
+        .blueprint-title { font-weight: 700; margin-bottom: 16px; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>I Built an AI Team That Manages Itself (And Cut My Costs by 80%)</h1>
-            <p class="subtitle">How switching to the "expensive" model actually saved me money</p>
-            <div class="meta">Aravindh • February 2026 • 8 min read</div>
+            <h1>I Built an AI Team in 500 Lines of Code (You Shouldn't)</h1>
+            <p class="subtitle">Why building your own AI orchestration system is a terrible idea — and how Nanoclaw does it better</p>
+            <div class="meta">Aravindh • February 2026 • 9 min read</div>
         </header>
 
         <article>
-            <p>Last month, my AI bill was crushing me. Not because I was using ChatGPT for everything — I had built my own agent system called Nanoclaw. But here's the thing: <span class="highlight">having AI agents is easy. Having them not step on each other's toes? That's the hard part.</span></p>
+            <p>Everyone's building AI agent systems right now. Most of them are doing it wrong.</p>
 
-            <p>So I did something counterintuitive. I upgraded every single agent to Opus (the most expensive Claude model) and added a whole orchestration layer on top. My costs dropped 80%.</p>
+            <p>They're copying OpenClaw — setting up their own orchestration, worrying about which model to use for which task, building Docker containers, setting up task queues, and spending weeks on infrastructure that <span class="highlight">still doesn't solve the actual problem.</span></p>
 
-            <p>Here's how.</p>
+            <p>I know because I built one. Nanoclaw started as 500 lines of Python. It's now a full orchestration system with 6 specialist agents. And here's what I learned: <strong>you shouldn't build this yourself.</strong></p>
 
-            <h2>The Problem: AI Anarchy</h2>
-            
-            <p>I built Nanoclaw to be my personal assistant team. I had agents for coding, design, testing, architecture, product strategy, and research. The interface was WhatsApp. I'd message, agents would respond. Worked great... until it didn't.</p>
+            <h2>The OpenClaw Problem</h2>
+
+            <p>OpenClaw is brilliant. It's also a blueprint for pain.</p>
+
+            <p>If you follow the standard OpenClaw approach, here's what you're signing up for:</p>
+
+            <div class="callout callout-warning">
+                <ul>
+                    <li>Choose which model for which task (Opus? Sonnet? Haiku?)</li>
+                    <li>Set up a task queue system</li>
+                    <li>Configure Docker containers for isolation</li>
+                    <li>Build orchestration logic so agents don't collide</li>
+                    <li>Monitor costs across different models</li>
+                    <li>Handle retries when cheap models fail</li>
+                    <li>Debug race conditions between agents</li>
+                    <li>Manually track which agent should run when</li>
+                </ul>
+            </div>
+
+            <p>And even after all that setup, you still have to <em>pay per API call</em>. Every retry costs money. Every context window expansion costs money. One agent going rogue and retrying 10 times? That's your problem.</p>
+
+            <h2>The Nanoclaw Approach</h2>
+
+            <p>I built Nanoclaw differently. Instead of making you think about infrastructure, it handles everything with a simple subscription model:</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card diy-card">
+                    <div class="card-title">DIY OpenClaw Setup</div>
+                    <ul style="font-size: 14px; margin-top: 12px;">
+                        <li>Choose models manually</li>
+                        <li>Pay per API call</li>
+                        <li>Set up orchestration</li>
+                        <li>Configure Docker</li>
+                        <li>Monitor retry costs</li>
+                        <li>Debug agent conflicts</li>
+                        <li>Time to production: 2-3 weeks</li>
+                    </ul>
+                </div>
+                <div class="comparison-card nanoclaw-card">
+                    <div class="card-title">Nanoclaw</div>
+                    <ul style="font-size: 14px; margin-top: 12px;">
+                        <li>Auto-selects best model</li>
+                        <li>Flat monthly subscription</li>
+                        <li>Built-in orchestration</li>
+                        <li>Pre-configured agents</li>
+                        <li>Unlimited retries included</li>
+                        <li>Zero config needed</li>
+                        <li>Time to production: 5 minutes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Why Subscription Beats Pay-Per-Call</h3>
+
+            <p>With OpenClaw-style setups, you're constantly worried about costs:</p>
+            <ul>
+                <li>Should I use Opus for this? It's 3x more expensive...</li>
+                <li>What if the agent retries and burns through my budget?</li>
+                <li>Can I afford to use the good model for simple tasks?</li>
+            </ul>
+
+            <p>Nanoclaw's subscription model eliminates this completely. <span class="highlight">Use the best model for every task. Retry as many times as needed. Never worry about a surprise bill.</span></p>
+
+            <h2>The 500-Line Core</h2>
+
+            <p>Here's what shocked me: the core of Nanoclaw is only 500 lines of code. That's it.</p>
+
+            <div class="blueprint">
+                <div class="blueprint-title">The Nanoclaw Blueprint:</div>
+                <ul>
+                    <li><strong>WhatsApp Interface</strong> (80 lines) — Message in, actions out</li>
+                    <li><strong>Task Queue</strong> (120 lines) — Agents never collide</li>
+                    <li><strong>Model Router</strong> (60 lines) — Auto-picks Opus/Sonnet/Haiku</li>
+                    <li><strong>Agent Registry</strong> (90 lines) — 6 specialists (Turing, Jony, Nitty, Ada, Steve, Wanderer)</li>
+                    <li><strong>Docker Manager</strong> (100 lines) — Fresh session per task</li>
+                    <li><strong>Notification System</strong> (50 lines) — Discord webhooks</li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 16px; color: #666;"><em>Total: ~500 lines of orchestration logic. Everything else is just glue.</em></p>
+            </div>
+
+            <p>But here's the thing: <strong>those 500 lines took months to get right.</strong></p>
+
+            <p>I debugged race conditions. I optimized model selection. I figured out when to kill containers and when to keep them alive. I built retry logic that doesn't waste money. I added cost tracking so the subscription model actually works.</p>
+
+            <p>You don't want to do this.</p>
+
+            <h2>What I Added Beyond the Core</h2>
+
+            <p>The 500-line core handles orchestration. But a production system needs more:</p>
+
+            <h3>Kuruvi: The Management Layer</h3>
+            <ul>
+                <li><strong>Convex Database</strong> — Real-time task state across all agents</li>
+                <li><strong>GitHub Integration</strong> — Every code change auto-committed</li>
+                <li><strong>Agent Monitoring</strong> — See what each agent is doing in real-time</li>
+                <li><strong>Cost Analytics</strong> — Track which agents are worth Opus vs Sonnet</li>
+                <li><strong>Task History</strong> — Full audit trail of every decision</li>
+            </ul>
+
+            <h3>The Agent Team</h3>
+            <p>Each agent runs in isolation with its own specialty:</p>
+            <ul>
+                <li><strong>Turing</strong> — Code implementation (always Opus)</li>
+                <li><strong>Jony</strong> — UI/UX design (Opus for complex, Sonnet for simple)</li>
+                <li><strong>Nitty</strong> — Testing and QA (Haiku is fine, it's just running tests)</li>
+                <li><strong>Ada</strong> — System architecture (Opus, no compromises)</li>
+                <li><strong>Steve</strong> — Product strategy (Opus for analysis, Sonnet for summaries)</li>
+                <li><strong>Wanderer</strong> — Research (Sonnet with web search)</li>
+            </ul>
+
+            <p>Notice how model selection is <em>per agent, per task</em>? That's the kind of optimization you'd have to build yourself with OpenClaw. Nanoclaw does it automatically.</p>
+
+            <h2>The Real Cost Comparison</h2>
+
+            <p>Let's talk numbers. Here's what it actually costs to run a 6-agent team:</p>
 
             <div class="callout">
-                <p><strong>The breaking point:</strong> I asked Turing to implement a feature. Nitty started testing before Turing finished. Jony started designing UI for code that didn't exist yet. Everything collided. I spent 3 hours untangling the mess.</p>
+                <p><strong>OpenClaw DIY Approach:</strong></p>
+                <ul>
+                    <li>Infrastructure setup: 2-3 weeks ($5,000+ in dev time)</li>
+                    <li>Claude API costs: $120-$180/month (highly variable)</li>
+                    <li>Server costs: $30-$50/month (Docker hosting)</li>
+                    <li>Maintenance: 5-10 hours/month (debugging, monitoring)</li>
+                    <li><strong>Hidden cost:</strong> Constant worry about retry loops and runaway bills</li>
+                </ul>
             </div>
 
-            <p>The real issue? <strong>No orchestration.</strong> Agents were just workers with no manager.</p>
-
-            <h2>The Expensive Solution That Actually Saved Money</h2>
-
-            <p>Everyone says "use the cheap model for simple tasks." But here's what nobody tells you: <span class="highlight">cheap models retry more.</span></p>
-
-            <div class="cost-comparison">
-                <div class="cost-card cost-before">
-                    <div>Before (Sonnet)</div>
-                    <div class="cost-amount">$180</div>
-                    <p style="font-size: 14px;">~40% task failure rate<br>Avg 2.3 retries per task</p>
-                </div>
-                <div class="cost-card cost-after">
-                    <div>After (Opus + Kuruvi)</div>
-                    <div class="cost-amount">$35</div>
-                    <p style="font-size: 14px;">~5% task failure rate<br>Avg 1.1 retries per task</p>
-                </div>
+            <div class="callout callout-success">
+                <p><strong>Nanoclaw Subscription:</strong></p>
+                <ul>
+                    <li>Setup time: 5 minutes (connect WhatsApp)</li>
+                    <li>Monthly cost: $49 flat (unlimited usage within fair use)</li>
+                    <li>Server costs: $0 (included)</li>
+                    <li>Maintenance: 0 hours (we handle it)</li>
+                    <li><strong>Peace of mind:</strong> Use the best model every time, no bill shock</li>
+                </ul>
             </div>
 
-            <p>Opus costs 3x more per token. But when it actually <em>completes the task the first time</em>, you use way fewer tokens overall.</p>
+            <h2>Why I'm Not Open-Sourcing Kuruvi</h2>
 
-            <h2>Enter Kuruvi: The Orchestration Layer</h2>
+            <p>People keep asking me to open-source the full Kuruvi system. Here's why I won't:</p>
 
-            <p>I built Kuruvi to solve the coordination problem. Here's how it works:</p>
+            <p><strong>Because you don't need it.</strong></p>
 
-            <h3>1. Task Queue System</h3>
-            <p>Instead of agents running simultaneously, Kuruvi maintains a task queue. Each agent only starts when the previous one finishes. No collisions.</p>
+            <p>The 500-line core? That's coming. You can build your own simple orchestration if you want to learn. But the production-grade version with Kuruvi, cost optimization, model routing, and agent management? <span class="highlight">That's what the Nanoclaw subscription is for.</span></p>
 
-            <h3>2. Docker Isolation</h3>
-            <p>Every agent runs in its own Docker container with a fresh Claude session. When the task is done, the container dies. No context pollution.</p>
+            <p>I spent months getting this right. The subscription model means:</p>
+            <ul>
+                <li>I handle infrastructure so you don't have to</li>
+                <li>Model costs are predictable (no surprise bills)</li>
+                <li>You get improvements automatically (no upgrade work)</li>
+                <li>I eat the cost of retries (you just get results)</li>
+            </ul>
 
-            <h3>3. Convex Backend</h3>
-            <p>All task state lives in Convex (real-time database). Agents can see what's in progress, what's queued, what's done. Full visibility, zero race conditions.</p>
+            <h2>The Blueprint (If You Insist)</h2>
 
-            <h3>4. Discord Notifications</h3>
-            <p>Every completed task posts to Discord. I get a notification, can review the work, and approve or request changes.</p>
+            <p>If you really want to build this yourself, here's the architecture:</p>
 
-            <div class="callout">
-                <p><strong>The magic:</strong> I went from managing 6 chaotic AI agents to managing 1 orchestrator that manages 6 disciplined AI agents. The cognitive load dropped by 90%.</p>
-            </div>
+            <ol>
+                <li><strong>Interface Layer</strong> — WhatsApp (or Slack, Discord, whatever)</li>
+                <li><strong>Orchestrator</strong> — Main agent (Helix) that breaks down tasks</li>
+                <li><strong>Task Queue</strong> — Convex or similar real-time database</li>
+                <li><strong>Agent Workers</strong> — Docker containers, one per agent per task</li>
+                <li><strong>Model Router</strong> — Logic to pick Opus/Sonnet/Haiku based on task</li>
+                <li><strong>Notification System</strong> — Discord webhooks for visibility</li>
+                <li><strong>Cost Tracker</strong> — Monitor API usage per agent</li>
+                <li><strong>Git Integration</strong> — Auto-commit code changes</li>
+            </ol>
 
-            <h2>Why This Matters</h2>
+            <p>That's the high-level. The actual implementation has edge cases I didn't anticipate:</p>
+            <ul>
+                <li>What if two agents need the same file?</li>
+                <li>How do you handle Docker container cleanup when tasks fail?</li>
+                <li>When should you upgrade from Sonnet to Opus mid-task?</li>
+                <li>How do you prevent context pollution between tasks?</li>
+                <li>What's the right retry strategy that doesn't waste money?</li>
+            </ul>
 
-            <p>Everyone's building AI agents. But here's the thing: <strong>the hard part isn't the agent. It's the orchestration.</strong></p>
-
-            <p>When you have one AI, you manage it. When you have ten, they need to manage each other. That's the unlock.</p>
+            <p>Figure these out yourself, or just use Nanoclaw.</p>
 
             <h2>Lessons Learned</h2>
 
-            <ul>
-                <li><strong>Quality > Quantity:</strong> One Opus call that works beats three Sonnet retries</li>
-                <li><strong>Orchestration is Everything:</strong> Context matters more than capability</li>
-                <li><strong>Fresh Sessions > Long Context:</strong> Kill the container, start clean</li>
-                <li><strong>Async > Real-time:</strong> Task queues let agents work without blocking</li>
-            </ul>
+            <h3>1. Orchestration is Harder Than You Think</h3>
+            <p>The 500-line core was easy. Handling edge cases took months. Race conditions between agents. Context pollution. Retry storms. These aren't theoretical problems — they're production nightmares.</p>
+
+            <h3>2. Model Selection Matters More Than You'd Expect</h3>
+            <p>Using Opus for everything is expensive. Using Sonnet for everything gets bad results. The magic is knowing when to switch. Nanoclaw learned this over thousands of tasks.</p>
+
+            <h3>3. Subscription Beats Pay-Per-Call for Peace of Mind</h3>
+            <p>The psychological difference is huge. With pay-per-call, you're constantly optimizing for cost. With subscription, you optimize for results.</p>
+
+            <h3>4. Fresh Sessions Are Underrated</h3>
+            <p>Killing the Docker container after each task sounds wasteful. It's actually brilliant. No context pollution, no memory leaks, no weird state bugs.</p>
 
             <h2>The Bottom Line</h2>
 
-            <p>I replaced 20 hours of manual AI wrangling per week with a $35/month orchestration system. The future isn't one super-intelligent AI. It's a bunch of specialized AIs that know when to talk and when to shut up.</p>
+            <p>I built Nanoclaw to scratch my own itch. I needed a team of AI agents that wouldn't fight each other, wouldn't cost a fortune, and wouldn't require constant babysitting.</p>
 
-            <p><em>Kuruvi is open source (coming soon). Follow the build at <a href="https://aravindh.me">aravindh.me</a>.</em></p>
+            <p>The result is a system that:</p>
+            <ul>
+                <li>Handles 6 specialist agents with zero collisions</li>
+                <li>Auto-selects the best model for each task</li>
+                <li>Costs $49/month flat (no surprise bills)</li>
+                <li>Requires zero maintenance (I handle it)</li>
+                <li>Just works via WhatsApp (no UI to learn)</li>
+            </ul>
+
+            <p><strong>You can build this yourself.</strong> The 500-line core is proof it's possible. But unless you're doing this to learn, you're better off with the subscription.</p>
+
+            <p>Because the hard part isn't building the system. <span class="highlight">It's maintaining it, debugging it, and keeping costs under control when you're at 3am trying to figure out why your agents are in a retry loop.</span></p>
+
+            <div class="callout callout-success">
+                <p><strong>Try Nanoclaw:</strong> Text <code>@Helix</code> on WhatsApp to get started. First month is free. No credit card required.</p>
+                <p style="margin-top: 12px;"><em>Or build your own. The 500-line blueprint will be open-sourced next month at <a href="https://github.com/nanoclaw/core">github.com/nanoclaw/core</a>.</em></p>
+            </div>
         </article>
     </div>
 </body>
