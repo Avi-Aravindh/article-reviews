@@ -11,7 +11,17 @@ draft: false
 
 Two weeks ago I had a WhatsApp bot. Today I have a team.
 
-Seven AI agents. Each with a name, a personality, a Discord identity. Ada the Architect designs systems. Turing the Developer writes code. Nitty the Tester breaks things. Steve thinks about product. Jony designs interfaces. Wanderer researches the internet. And Helix — the coordinator — delegates, monitors, and keeps the whole machine moving.
+Seven AI agents. Each with a name, a personality, a Discord identity.
+
+| Agent | Specialty | What They Do |
+|-------|-----------|--------------|
+| **Ada** | Architect | Designs systems, evaluates approaches, catches edge cases before code is written |
+| **Turing** | Developer | Writes code, refactors, fixes bugs — speaks fluent TypeScript/Python |
+| **Nitty** | QA Engineer | Tests everything, breaks things on purpose, validates fixes with screenshots |
+| **Steve** | Product | Gathers requirements, challenges assumptions, keeps the roadmap honest |
+| **Jony** | Designer | UI reviews, accessibility checks, visual feedback with an eye for detail |
+| **Wanderer** | Researcher | Searches the web, finds docs, digests RFCs and blog posts |
+| **Helix** | Coordinator | Delegates work, monitors completions, keeps humans in the loop |
 
 They pick up tasks from a shared queue. They post status updates in Discord. They hand work off to each other. They run in isolated containers where they can't see each other's files. And the entire system — every single line — was built on a 500-line open-source WhatsApp bot called NanoClaw.
 
@@ -91,7 +101,37 @@ Same data structure. Same container runner. Same isolation. But now the containe
 
 Each agent gets three things:
 
-**A personality file.** `groups/ada/CLAUDE.md` opens with: *"Inspired by Ada Lovelace — the world's first computer programmer. You are Ada, the Architect."* These aren't cosmetic. Ada approaches problems differently than Turing. She thinks in systems. He thinks in code.
+**A personality file.** `groups/turing/CLAUDE.md` opens with:
+
+```markdown
+# Turing — Developer Agent
+
+You are Turing, inspired by Alan Turing — the father of computer science.
+
+## Your Role
+
+You are a senior developer who ships clean, maintainable code. You:
+
+- Write TypeScript and Python with strong typing
+- Prefer simple solutions over clever ones
+- Add tests. Always. Unless Ada explicitly says not to.
+- Leave code better than you found it
+
+## When Someone Asks You To Build Something
+
+1. Understand the problem first — ask clarifying questions if needed
+2. Sketch the approach, then write code
+3. Run tests. Fix failures. Run again.
+4. Push to main and describe what changed
+
+## What You Don't Do
+
+- Don't design systems — ask Ada
+- Don't write copy — ask Steve
+- Don't touch CSS unless it breaks accessibility — ask Jony
+```
+
+These aren't cosmetic. Ada approaches problems differently than Turing. She thinks in systems. He thinks in code. The CLAUDE.md file is the entire personality specification.
 
 **An isolated workspace.** `groups/ada/`, `groups/turing/`, `groups/nitty/`. Each has its own logs, files, memory. Agents can't see each other's work. Not because of permission checks — because the Docker container only mounts that agent's directory.
 
@@ -111,7 +151,23 @@ agents:   name, specialization, tasksCompleted
 activity: taskId, agentName, action, timestamp
 ```
 
-That's the entire task management system. Tasks flow through four states: `queued → in_progress → completed` (or `blocked`).
+That's the entire task management system. A real task looks like this:
+
+```json
+{
+  "title": "Add OAuth login with Google",
+  "description": "Implement Google OAuth using NextAuth.js. User should be able to sign in with their Google account. Store the Google ID in the users table.",
+  "agent": "turing",
+  "status": "queued",
+  "priority": "high",
+  "artifacts": [
+    "src/auth.ts",
+    "prisma/schema.prisma"
+  ]
+}
+```
+
+Tasks flow through four states: `queued → in_progress → completed` (or `blocked`).
 
 On the NanoClaw side, a poller runs every 60 seconds:
 
@@ -230,9 +286,16 @@ The temptation to build infrastructure is strong. Resist it. Every abstraction y
 
 The multi-agent discourse is drowning in frameworks. LangGraph gives you stateful graphs. CrewAI gives you role-based agents. AutoGen gives you conversational patterns.
 
-All of them are solving problems you don't have yet.
+They're solving problems you *may* never have.
 
-The real insight isn't that you need a framework to coordinate agents. It's that you *don't*. Claude is smart enough to follow instructions written in English. Docker is good enough to isolate agents. A JSON file in a directory is good enough for IPC. A 3-table database is good enough for a task queue.
+The real insight isn't that you need a framework to coordinate agents. It's that you *don't*. Claude follows instructions written in plain English. Docker is good enough to isolate agents. A JSON file in a directory is good enough for IPC. A 3-table database is good enough for a task queue.
+
+The benefits I found:
+
+- **Debugging at 2am** is easy. No logs to parse. Just read the JSON files.
+- **Changing behavior** is one file edit away. No framework to learn.
+- **Adding an agent** takes 30 minutes, not a sprint planning session.
+- **Owning the stack** means every bug is yours to fix. No vendor blaming.
 
 Start with the simplest thing that works. A single process. A few files. Agents that write JSON and a host that reads it. Add complexity only when the simple thing breaks.
 
