@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+    <linearGradient id="goldFade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#D4AF37" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#000000"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Grid lines -->
+  <line x1="0" y1="315" x2="1200" y2="315" stroke="#D4AF37" stroke-opacity="0.06" stroke-width="1"/>
+  <line x1="600" y1="0" x2="600" y2="630" stroke="#D4AF37" stroke-opacity="0.06" stroke-width="1"/>
+
+  <!-- Corner accents -->
+  <path d="M0 30 L0 0 L30 0" stroke="#D4AF37" stroke-width="2" stroke-opacity="0.4" fill="none"/>
+  <path d="M1170 0 L1200 0 L1200 30" stroke="#D4AF37" stroke-width="2" stroke-opacity="0.4" fill="none"/>
+  <path d="M0 600 L0 630 L30 630" stroke="#D4AF37" stroke-width="2" stroke-opacity="0.4" fill="none"/>
+  <path d="M1170 630 L1200 630 L1200 600" stroke="#D4AF37" stroke-width="2" stroke-opacity="0.4" fill="none"/>
+
+  <!-- Central hub (Helix) -->
+  <circle cx="600" cy="280" r="52" stroke="url(#gold)" stroke-width="2" fill="#000" fill-opacity="0.8"/>
+  <circle cx="600" cy="280" r="48" stroke="#D4AF37" stroke-width="1" stroke-opacity="0.2" fill="none"/>
+  <text x="600" y="275" text-anchor="middle" fill="#D4AF37" font-family="monospace" font-size="14" font-weight="bold">HELIX</text>
+  <text x="600" y="295" text-anchor="middle" fill="#D4AF37" font-family="monospace" font-size="10" fill-opacity="0.6">coordinator</text>
+
+  <!-- Agent nodes around the hub -->
+  <!-- Ada - top left -->
+  <circle cx="380" cy="180" r="36" stroke="#D4AF37" stroke-width="1.5" fill="#0a0a0a"/>
+  <text x="380" y="177" text-anchor="middle" fill="#D4AF37" font-family="monospace" font-size="12" font-weight="bold">ADA</text>
+  <text x="380" y="193" text-anchor="middle" fill="#888" font-family="monospace" font-size="9">architect</text>
+  <line x1="413" y1="200" x2="555" y2="262" stroke="#D4AF37" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Turing - top right -->
+  <circle cx="820" cy="180" r="36" stroke="#D4AF37" stroke-width="1.5" fill="#0a0a0a"/>
+  <text x="820" y="177" text-anchor="middle" fill="#D4AF37" font-family="monospace" font-size="12" font-weight="bold">TURING</text>
+  <text x="820" y="193" text-anchor="middle" fill="#888" font-family="monospace" font-size="9">developer</text>
+  <line x1="787" y1="200" x2="645" y2="262" stroke="#D4AF37" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Steve - left -->
+  <circle cx="340" cy="340" r="36" stroke="#D4AF37" stroke-width="1.5" fill="#0a0a0a"/>
+  <text x="340" y="337" text-anchor="middle" fill="#D4AF37" font-family="monospace" font-size="12" font-weight="bold">STEVE</text>
+  <text x="340" y="353" text-anchor="middle" fill="#888" font-family="monospace" font-size="9">product</text>
+  <line x1="376" y1="335" x2="548" y2="285" stroke="#D4AF37" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Nitty - right -->
+  <circle cx="860" cy="340" r="36" stroke="#D4AF37" stroke-width="1.5" fill="#0a0a0a"/>
+  <text x="860" y="337" text-anchor="middle" fill="#D4AF37" font-family="monospace" font-size="12" font-weight="bold">NITTY</text>
+  <text x="860" y="353" text-anchor="middle" fill="#888" font-family="monospace" font-size="9">tester</text>
+  <line x1="824" y1="335" x2="652" y2="285" stroke="#D4AF37" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Jony - bottom left -->
+  <circle cx="430" cy="440" r="36" stroke="#D4AF37" stroke-width="1.5" fill="#0a0a0a"/>
+  <text x="430" y="437" text-anchor="middle" fill="#D4AF37" font-family="monospace" font-size="12" font-weight="bold">JONY</text>
+  <text x="430" y="453" text-anchor="middle" fill="#888" font-family="monospace" font-size="9">designer</text>
+  <line x1="455" y1="418" x2="575" y2="320" stroke="#D4AF37" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Wanderer - bottom right -->
+  <circle cx="770" cy="440" r="36" stroke="#D4AF37" stroke-width="1.5" fill="#0a0a0a"/>
+  <text x="770" y="437" text-anchor="middle" fill="#D4AF37" font-family="monospace" font-size="12" font-weight="bold">WANDERER</text>
+  <text x="770" y="453" text-anchor="middle" fill="#888" font-family="monospace" font-size="9">explorer</text>
+  <line x1="745" y1="418" x2="625" y2="320" stroke="#D4AF37" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Input channels -->
+  <!-- WhatsApp -->
+  <rect x="60" y="255" width="140" height="50" rx="4" stroke="#D4AF37" stroke-width="1" stroke-opacity="0.4" fill="#0a0a0a"/>
+  <text x="130" y="275" text-anchor="middle" fill="#D4AF37" font-family="monospace" font-size="11" font-weight="bold">WhatsApp</text>
+  <text x="130" y="293" text-anchor="middle" fill="#888" font-family="monospace" font-size="9">input channel</text>
+  <line x1="200" y1="280" x2="548" y2="280" stroke="url(#goldFade)" stroke-width="1.5"/>
+  <polygon points="540,276 548,280 540,284" fill="#D4AF37" fill-opacity="0.6"/>
+
+  <!-- Discord -->
+  <rect x="1000" y="255" width="140" height="50" rx="4" stroke="#D4AF37" stroke-width="1" stroke-opacity="0.4" fill="#0a0a0a"/>
+  <text x="1070" y="275" text-anchor="middle" fill="#D4AF37" font-family="monospace" font-size="11" font-weight="bold">Discord</text>
+  <text x="1070" y="293" text-anchor="middle" fill="#888" font-family="monospace" font-size="9">workspace</text>
+  <line x1="652" y1="280" x2="1000" y2="280" stroke="#D4AF37" stroke-opacity="0.15" stroke-width="1.5"/>
+  <polygon points="992,276 1000,280 992,284" fill="#D4AF37" fill-opacity="0.3"/>
+
+  <!-- Task queue label -->
+  <rect x="540" y="370" width="120" height="32" rx="3" stroke="#D4AF37" stroke-width="1" stroke-opacity="0.3" fill="#0a0a0a"/>
+  <text x="600" y="391" text-anchor="middle" fill="#D4AF37" font-family="monospace" font-size="10" fill-opacity="0.7">CONVEX QUEUE</text>
+
+  <!-- Bottom tagline -->
+  <text x="600" y="565" text-anchor="middle" fill="#D4AF37" font-family="monospace" font-size="13" fill-opacity="0.5" letter-spacing="4">7 AGENTS / 1 PROCESS / 0 FRAMEWORKS</text>
+  <text x="600" y="590" text-anchor="middle" fill="#555" font-family="monospace" font-size="10" letter-spacing="2">KURUVI — BUILT ON NANOCLAW</text>
+</svg>

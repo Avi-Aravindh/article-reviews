@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article Review: Kuruvi Blueprint</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      color: #e0e0e0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+    }
+
+    .review-banner {
+      background: #1a1200;
+      border-bottom: 1px solid #D4AF37;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .review-banner h3 {
+      color: #D4AF37;
+      font-family: monospace;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .review-banner .meta {
+      color: #888;
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 60px 20px 100px;
+    }
+
+    /* Article header */
+    .article-meta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 24px;
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    .article-meta .date { color: #D4AF37; }
+    .article-meta .sep { color: #444; }
+    .article-meta .category { color: #888; }
+
+    h1 {
+      font-size: 2.4em;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .description {
+      font-size: 1.15em;
+      color: #999;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .tag {
+      font-family: monospace;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: rgba(212, 175, 55, 0.1);
+      color: #D4AF37;
+    }
+
+    /* Content */
+    .hero-img {
+      width: 100%;
+      margin: 0 0 48px;
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    h2 {
+      font-size: 1.5em;
+      color: #fff;
+      margin: 48px 0 16px;
+      padding-top: 16px;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: #ccc;
+    }
+
+    strong { color: #fff; }
+
+    a { color: #D4AF37; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    hr {
+      border: none;
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+      margin: 48px 0;
+    }
+
+    ul, ol {
+      margin: 0 0 16px 24px;
+      color: #ccc;
+    }
+
+    li { margin-bottom: 8px; }
+
+    blockquote {
+      border-left: 3px solid #D4AF37;
+      padding: 12px 20px;
+      margin: 20px 0;
+      background: rgba(212, 175, 55, 0.05);
+      color: #bbb;
+      font-style: italic;
+    }
+
+    pre {
+      background: #0d0d0d;
+      border: 1px solid #222;
+      border-radius: 6px;
+      padding: 16px 20px;
+      overflow-x: auto;
+      margin: 16px 0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: #D4AF37;
+    }
+
+    pre code {
+      color: #ccc;
+    }
+
+    .inline-code {
+      background: rgba(212, 175, 55, 0.1);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+
+    .diagram-img {
+      width: 100%;
+      margin: 24px 0;
+      border-radius: 6px;
+    }
+
+    em { color: #aaa; }
+
+    /* Twitter thread section */
+    .twitter-section {
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 2px solid #D4AF37;
+    }
+
+    .twitter-section h2 {
+      color: #D4AF37;
+      font-family: monospace;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 1.1em;
+      margin-bottom: 32px;
+    }
+
+    .tweet {
+      background: #0a0a0a;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .tweet::before {
+      content: attr(data-num);
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      background: #D4AF37;
+      color: #000;
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .tweet p {
+      color: #ddd;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .tweet pre {
+      font-size: 12px;
+      margin: 12px 0;
+    }
+
+    .tweet .note {
+      color: #666;
+      font-size: 12px;
+      font-style: italic;
+      margin-top: 12px;
+    }
+
+    .posting-notes {
+      background: #0d0d00;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-top: 32px;
+    }
+
+    .posting-notes h3 {
+      color: #D4AF37;
+      font-family: monospace;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .posting-notes p, .posting-notes li {
+      color: #888;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="review-banner">
+  <h3>Article Review</h3>
+  <span class="meta">kuruvi-blueprint &middot; Feb 15, 2026 &middot; Draft</span>
+</div>
+
+<div class="container">
+
+  <!-- ARTICLE META -->
+  <div class="article-meta">
+    <span class="date">February 15, 2026</span>
+    <span class="sep">/</span>
+    <span class="category">Engineering</span>
+  </div>
+
+  <h1>I Built a 7-Agent AI Team That Runs Itself. Here's the Blueprint.</h1>
+
+  <p class="description">How I turned a simple WhatsApp bot into a self-organizing team of AI agents — each with its own identity, its own Discord presence, and its own specialty. No frameworks. No LangChain. Just files.</p>
+
+  <div class="tags">
+    <span class="tag">ai</span>
+    <span class="tag">agents</span>
+    <span class="tag">multi-agent</span>
+    <span class="tag">claude</span>
+    <span class="tag">building</span>
+  </div>
+
+  <!-- HERO IMAGE -->
+  <img src="images/kuruvi-hero.svg" alt="Kuruvi Architecture" class="hero-img">
+
+  <!-- ARTICLE BODY -->
+  <p>Two weeks ago I had a WhatsApp bot. Today I have a team.</p>
+
+  <p>Seven AI agents. Each with a name, a personality, a Discord identity. Ada the Architect designs systems. Turing the Developer writes code. Nitty the Tester breaks things. Steve thinks about product. Jony designs interfaces. Wanderer researches the internet. And Helix — the coordinator — delegates, monitors, and keeps the whole machine moving.</p>
+
+  <p>They pick up tasks from a shared queue. They post status updates in Discord. They hand work off to each other. They run in isolated containers where they can't see each other's files. And the entire system — every single line — was built on a 500-line open-source WhatsApp bot called NanoClaw.</p>
+
+  <p>No LangChain. No CrewAI. No AutoGen. No orchestration framework. Just files.</p>
+
+  <p>This is how.</p>
+
+  <hr>
+
+  <h2>The Foundation: What NanoClaw Gives You</h2>
+
+  <p>NanoClaw's entire architecture fits in one sentence:</p>
+
+  <p><strong>WhatsApp message &rarr; SQLite &rarr; Polling loop &rarr; Docker container &rarr; Claude Agent SDK &rarr; Response</strong></p>
+
+  <p>One Node.js process. Five source files. You can read the whole thing in 8 minutes. That's not a marketing claim — I timed it.</p>
+
+  <p>Out of the box, you get:</p>
+
+  <ul>
+    <li><strong>WhatsApp I/O</strong> — message Claude from your phone</li>
+    <li><strong>Container isolation</strong> — every agent invocation runs in a fresh Docker container</li>
+    <li><strong>Persistent memory</strong> — <code class="inline-code">CLAUDE.md</code> files that survive across sessions</li>
+    <li><strong>Scheduled tasks</strong> — cron, interval, or one-shot</li>
+    <li><strong>File-based IPC</strong> — containers talk to the host by writing JSON files to a shared directory</li>
+  </ul>
+
+  <p>That last one is the key. File-based IPC sounds primitive. It's the most important architectural decision in the entire system.</p>
+
+  <hr>
+
+  <h2>Why File-Based IPC Is Secretly Genius</h2>
+
+  <p>When a container agent wants to send a WhatsApp message, it writes a JSON file:</p>
+
+  <pre><code>{
+  "type": "message",
+  "chatJid": "120363408887719416@g.us",
+  "text": "Task complete. Deployed to production."
+}</code></pre>
+
+  <p>The host process polls the directory, reads the file, sends the message, deletes the file.</p>
+
+  <p>That's it. No WebSocket connections. No message brokers. No gRPC. No protocol buffers. A directory and some JSON files.</p>
+
+  <p>Why this matters:</p>
+
+  <p><strong>Observable.</strong> <code class="inline-code">ls /data/ipc/ada/tasks/</code> — you can see exactly what's pending. No log diving.</p>
+
+  <p><strong>Debuggable.</strong> <code class="inline-code">cat</code> the file. Read it. Edit it. Replay it by copying it back. Try doing that with a WebSocket message.</p>
+
+  <p><strong>Bulletproof.</strong> Atomic writes (temp file &rarr; rename) prevent corruption. If the host crashes mid-read, the file is still there on restart.</p>
+
+  <p><strong>Language-agnostic.</strong> The container writes files. The host reads files. They don't need to agree on anything except JSON.</p>
+
+  <p>Everything I built on top — Discord, task delegation, agent-to-agent handoffs — uses this same primitive. Write a JSON file. The host picks it up.</p>
+
+  <hr>
+
+  <h2>Step 1: Turning One Agent Into Seven</h2>
+
+  <p>NanoClaw's <code class="inline-code">registered_groups.json</code> was designed for WhatsApp groups. A mapping of chat IDs to folder names. I added two fields:</p>
+
+  <pre><code>{
+  "__agent_ada__": {
+    "name": "Ada Agent",
+    "folder": "ada",
+    "trigger": "DISCORD_BOT",
+    "isAgent": true,
+    "agentType": "specialist"
+  }
+}</code></pre>
+
+  <p>Same data structure. Same container runner. Same isolation. But now the container spawns for a task from a queue instead of a WhatsApp message.</p>
+
+  <p>Each agent gets three things:</p>
+
+  <p><strong>A personality file.</strong> <code class="inline-code">groups/ada/CLAUDE.md</code> opens with: <em>"Inspired by Ada Lovelace — the world's first computer programmer. You are Ada, the Architect."</em> These aren't cosmetic. Ada approaches problems differently than Turing. She thinks in systems. He thinks in code.</p>
+
+  <p><strong>An isolated workspace.</strong> <code class="inline-code">groups/ada/</code>, <code class="inline-code">groups/turing/</code>, <code class="inline-code">groups/nitty/</code>. Each has its own logs, files, memory. Agents can't see each other's work. Not because of permission checks — because the Docker container only mounts that agent's directory.</p>
+
+  <p><strong>A Discord bot.</strong> Each agent has its own Discord bot token, its own identity, its own avatar. When Ada posts in <code class="inline-code">#agent-workspace</code>, it shows up <em>as Ada</em>. This sounds like a detail. It changes everything about how you interact with the system.</p>
+
+  <hr>
+
+  <h2>Step 2: The Task Queue</h2>
+
+  <p>Agents need a way to receive work. I built <strong>Kuruvi</strong> — a Next.js app backed by Convex (real-time database).</p>
+
+  <p>The schema is three tables:</p>
+
+  <pre><code>tasks:    title, description, agent, status, priority, artifacts
+agents:   name, specialization, tasksCompleted
+activity: taskId, agentName, action, timestamp</code></pre>
+
+  <p>That's the entire task management system. Tasks flow through four states: <code class="inline-code">queued &rarr; in_progress &rarr; completed</code> (or <code class="inline-code">blocked</code>).</p>
+
+  <p>On the NanoClaw side, a poller runs every 60 seconds:</p>
+
+  <ol>
+    <li>Query Convex for all tasks</li>
+    <li>Filter for <code class="inline-code">status: "queued"</code></li>
+    <li>Group by agent, pick highest-priority per agent</li>
+    <li>Spawn a Docker container for each (in parallel)</li>
+    <li>Mark <code class="inline-code">in_progress</code>, post to Discord</li>
+    <li>When done, mark <code class="inline-code">completed</code>, post result</li>
+  </ol>
+
+  <p>One task per agent per cycle. Fresh session per task — no context bleeds between independent work.</p>
+
+  <img src="images/kuruvi-task-flow.svg" alt="Task Lifecycle" class="diagram-img">
+
+  <hr>
+
+  <h2>Step 3: Discord as the Nervous System</h2>
+
+  <p>Discord serves two purposes.</p>
+
+  <p><strong>The workspace.</strong> All agents post to <code class="inline-code">#agent-workspace</code>. When Turing picks up a task:</p>
+
+  <blockquote>
+    <p>&#x1F504; <strong>Picking up task:</strong> Fix auth redirect bug<br>
+    Priority: high &middot; Task ID: <code>j57...</code></p>
+  </blockquote>
+
+  <p>When he finishes:</p>
+
+  <blockquote>
+    <p>&#x2705; <strong>Task complete:</strong> Fix auth redirect bug<br>
+    Pushed fix to <code>main</code>, deployed to production.</p>
+  </blockquote>
+
+  <p>When something breaks:</p>
+
+  <blockquote>
+    <p>&#x274C; <strong>Task failed:</strong> Fix auth redirect bug<br>
+    Error: Container timeout after 30 minutes</p>
+  </blockquote>
+
+  <p><strong>Direct messages.</strong> Users can DM any agent bot. Helix handles DMs immediately (spawns a container). Specialists queue them as tasks and respond asynchronously.</p>
+
+  <p>The Discord integration uses the same IPC primitive. Containers write:</p>
+
+  <pre><code>{
+  "type": "discord_send_message",
+  "channelId": "1470177644858441809",
+  "content": "&#x2705; Task complete: Fix auth bug"
+}</code></pre>
+
+  <p>The host picks it up and sends it through the correct bot client. Ada's messages come from Ada's bot. Turing's from Turing's.</p>
+
+  <hr>
+
+  <h2>Step 4: The Coordinator Pattern</h2>
+
+  <p>Helix is the coordinator. He runs in the <code class="inline-code">main</code> group with access to the entire project, all group folders, and the task database. The other six are specialists who only see their own workspace.</p>
+
+  <p>Here's the thing that surprised me: <strong>Helix's orchestration logic is just English in a CLAUDE.md file.</strong></p>
+
+  <pre><code>## Orchestration Workflow
+
+1. Monitor all agent completions
+2. Auto-kick next task when one completes
+3. Update user via WhatsApp on each completion
+4. Don't wait for Helix queue — agents report to their own queues</code></pre>
+
+  <p>No state machines. No DAGs. No workflow engine. Claude reads these instructions and follows them. When Turing finishes the auth fix, Helix sees the completion in Convex and kicks a test task to Nitty. When Nitty reports back, Helix verifies the screenshots and tells me on WhatsApp.</p>
+
+  <p>The coordinator pattern works when the coordinator is smart enough to follow instructions. Claude is.</p>
+
+  <hr>
+
+  <h2>What I Deliberately Didn't Build</h2>
+
+  <p><strong>No orchestration framework.</strong> The orchestration is 20 lines of English in a markdown file.</p>
+
+  <p><strong>No inter-agent protocol.</strong> Agents don't talk to each other. They write tasks to a queue. The coordinator reads completions.</p>
+
+  <p><strong>No agent runtime.</strong> Each agent is Claude Agent SDK in a Docker container with a CLAUDE.md file. That's it.</p>
+
+  <p><strong>No configuration system.</strong> Want to change an agent's behavior? Edit its CLAUDE.md. Want to add a new agent? Add an entry to a JSON file, create a Discord bot, set an env var.</p>
+
+  <p>The temptation to build infrastructure is strong. Resist it. Every abstraction you add is a thing you have to debug at 2am when an agent isn't responding.</p>
+
+  <hr>
+
+  <h2>The Failures (Because Honesty Matters)</h2>
+
+  <p><strong>The Discord bots all died silently today.</strong> <code class="inline-code">Promise.all</code> was launching 7 bot logins. One failed. All died. The Convex task poller was nested inside the same try/catch, so it died too. Tasks stopped being picked up. No errors surfaced anywhere useful. I fixed it with <code class="inline-code">Promise.allSettled</code> and moved the poller to start independently. Took 30 minutes of log diving.</p>
+
+  <p><strong>Agents repeat themselves.</strong> When the session transcript gets too large, Claude starts looping. I added auto-rotation at 5MB, but it's a blunt instrument.</p>
+
+  <p><strong>Fresh sessions mean no institutional memory.</strong> Each task starts from zero. The agent reads its CLAUDE.md but doesn't remember last week's conversation about the same codebase. The CLAUDE.md file is the only bridge, and it's manually maintained.</p>
+
+  <p><strong>Container startup isn't instant.</strong> Each task spins up a Docker container, which takes 3-5 seconds. For a human DMing an agent, that's noticeable. For batch tasks, it's fine.</p>
+
+  <hr>
+
+  <h2>The Numbers</h2>
+
+  <ul>
+    <li><strong>7 agents</strong> with distinct specialties</li>
+    <li><strong>~500 lines</strong> of NanoClaw core code (what I started with)</li>
+    <li><strong>~800 lines</strong> I added for Discord + Convex + task poller</li>
+    <li><strong>3 Convex tables</strong> (tasks, agents, activity)</li>
+    <li><strong>1 Node.js process</strong> running everything</li>
+    <li><strong>0 frameworks</strong> — no LangChain, no CrewAI, no LangGraph</li>
+    <li><strong>60 seconds</strong> — task poller interval</li>
+    <li><strong>30 minutes</strong> — max container timeout per task</li>
+  </ul>
+
+  <hr>
+
+  <h2>Why This Matters</h2>
+
+  <p>The multi-agent discourse is drowning in frameworks. LangGraph gives you stateful graphs. CrewAI gives you role-based agents. AutoGen gives you conversational patterns.</p>
+
+  <p>All of them are solving problems you don't have yet.</p>
+
+  <p>The real insight isn't that you need a framework to coordinate agents. It's that you <em>don't</em>. Claude is smart enough to follow instructions written in English. Docker is good enough to isolate agents. A JSON file in a directory is good enough for IPC. A 3-table database is good enough for a task queue.</p>
+
+  <p>Start with the simplest thing that works. A single process. A few files. Agents that write JSON and a host that reads it. Add complexity only when the simple thing breaks.</p>
+
+  <p>That's the blueprint. Fork NanoClaw. Add a CLAUDE.md. Write a JSON file. You have an agent.</p>
+
+  <p>Add six more and you have a team.</p>
+
+  <hr>
+
+  <p><em>Kuruvi is built on <a href="https://github.com/gavrielc/nanoclaw">NanoClaw</a>, an open-source personal Claude assistant. The name means "small bird" in Tamil — because the best systems are light enough to fly.</em></p>
+
+  <!-- ============================================= -->
+  <!-- TWITTER THREAD -->
+  <!-- ============================================= -->
+
+  <div class="twitter-section">
+    <h2>Twitter Thread (10 tweets)</h2>
+
+    <div class="tweet" data-num="1">
+      <p>I built a team of 7 AI agents that delegate tasks to each other, post updates in Discord, and run in isolated containers.</p>
+      <p>No LangChain. No CrewAI. No framework at all.</p>
+      <p>Just JSON files in a directory.</p>
+      <p>Here's the entire blueprint: &#x1F9F5;</p>
+      <p class="note">&#x1F4CE; Attach: kuruvi-hero.svg</p>
+    </div>
+
+    <div class="tweet" data-num="2">
+      <p>It started with a 500-line open source WhatsApp bot called NanoClaw.</p>
+      <p>One process. Five files. Claude runs in a Docker container, reads a CLAUDE.md file for memory, and writes JSON files to talk to the host.</p>
+      <p>That's the entire platform. Everything else was built on top.</p>
+    </div>
+
+    <div class="tweet" data-num="3">
+      <p>The secret ingredient: file-based IPC.</p>
+      <p>When an agent wants to send a Discord message, it writes this to a file:</p>
+      <pre><code>{"type": "discord_send_message",
+ "channelId": "...",
+ "content": "Task complete."}</code></pre>
+      <p>The host polls the directory. Reads. Acts. Deletes.</p>
+      <p>No WebSockets. No gRPC. No message broker.</p>
+    </div>
+
+    <div class="tweet" data-num="4">
+      <p>To go from 1 agent to 7, I added two fields to a JSON config:</p>
+      <pre><code>"isAgent": true,
+"agentType": "specialist"</code></pre>
+      <p>Same container runner. Same isolation. Each agent gets:</p>
+      <p>&#x2022; A CLAUDE.md personality file<br>
+      &#x2022; An isolated workspace (can't see other agents' files)<br>
+      &#x2022; Its own Discord bot identity</p>
+    </div>
+
+    <div class="tweet" data-num="5">
+      <p>The agents:</p>
+      <p>&#x1F3D7;&#xFE0F; Ada &mdash; system architect<br>
+      &#x1F4BB; Turing &mdash; developer<br>
+      &#x1F3AF; Steve &mdash; product visionary<br>
+      &#x1F3A8; Jony &mdash; designer<br>
+      &#x1F50D; Nitty &mdash; QA tester<br>
+      &#x1F30D; Wanderer &mdash; web researcher<br>
+      &#x26A1; Helix &mdash; coordinator (delegates to all of them)</p>
+      <p>Each named after a computing legend. Each with a distinct approach to problems.</p>
+    </div>
+
+    <div class="tweet" data-num="6">
+      <p>The task queue is 3 Convex tables:</p>
+      <p>&#x2022; tasks (title, agent, status, priority)<br>
+      &#x2022; agents (name, specialization)<br>
+      &#x2022; activity (audit trail)</p>
+      <p>A poller runs every 60s. Picks one task per agent. Spawns a Docker container. Posts results to Discord.</p>
+      <p>That's the orchestration. All of it.</p>
+      <p class="note">&#x1F4CE; Attach: kuruvi-task-flow.svg</p>
+    </div>
+
+    <div class="tweet" data-num="7">
+      <p>Here's the part nobody talks about:</p>
+      <p>Helix's orchestration logic is literally written in English in a markdown file:</p>
+      <p>"Monitor all agent completions. Auto-kick next task when one completes. Update user via WhatsApp."</p>
+      <p>No state machines. No DAGs. Claude just... follows instructions.</p>
+    </div>
+
+    <div class="tweet" data-num="8">
+      <p>What I deliberately didn't build:</p>
+      <p>&#x274C; No orchestration framework<br>
+      &#x274C; No inter-agent protocol<br>
+      &#x274C; No agent runtime<br>
+      &#x274C; No configuration system</p>
+      <p>Want to change an agent's behavior? Edit a markdown file.<br>
+      Want to add a new agent? Add a line to a JSON file.</p>
+    </div>
+
+    <div class="tweet" data-num="9">
+      <p>The honest failures:</p>
+      <p>&#x2022; All 7 Discord bots died silently because Promise.all killed them all when one failed<br>
+      &#x2022; Agents repeat themselves when sessions get too large<br>
+      &#x2022; No institutional memory between tasks<br>
+      &#x2022; Container startup takes 3-5s (noticeable for DMs)</p>
+      <p>Shipped anyway.</p>
+    </div>
+
+    <div class="tweet" data-num="10">
+      <p>The full blueprint &mdash; with code snippets, architecture diagrams, and all the details I couldn't fit in a thread:</p>
+      <p>&#x2192; [LINK TO ARTICLE]</p>
+      <p>Built on NanoClaw (open source): github.com/gavrielc/nanoclaw</p>
+      <p>The name "Kuruvi" means "small bird" in Tamil. The best systems are light enough to fly.</p>
+    </div>
+
+    <div class="posting-notes">
+      <h3>Posting Notes</h3>
+      <ul>
+        <li>Attach <strong>kuruvi-hero.svg</strong> to Tweet 1</li>
+        <li>Attach <strong>kuruvi-task-flow.svg</strong> to Tweet 6</li>
+        <li>Replace [LINK TO ARTICLE] with the aravindh.me URL once published</li>
+        <li>Tag @AnthropicAI and @alexalbert__ in a reply to the thread</li>
+        <li>Best times: Tue/Wed 9-10am PT or Sunday 7-9pm PT</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
